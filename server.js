@@ -2,6 +2,7 @@ const express = require('express');
 const taskrouter = require('./routes/task-router.js');
 const connectDb = require('./db/connection.js');
 const notFound = require('./middleware/not-found/notfound.js');
+const errorhandler = require('./middleware/errorhandler.js');
 
 const app = express();
 app.use(express.json());
@@ -17,6 +18,7 @@ app.use('/api/v1/tasks', taskrouter);
 
 
 app.use(notFound);
+app.use(errorhandler);
 
 connectDb('').then(
 	()=>{
